@@ -10,6 +10,8 @@
 #include "utils/common.h"
 #include "ap/ap_config.h"
 
+#define SYCOPHANT_DIR_LEN 255
+
 // Maintain a global pointer to hostapd config struct for parts of hostapd that
 // don't have it passed in as context
 struct mana_conf {

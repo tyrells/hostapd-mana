@@ -130,8 +130,8 @@ static struct wpabuf * eap_mschapv2_build_challenge(
 	if (mana.conf->enable_sycophant && os_strcmp("NOT_SET",mana.conf->sycophant_dir) != 0) {
 		char sup_state[2] = "*";
 		FILE* sycophantState;
-		char sycophantStateFile[sizeof(mana.conf->sycophant_dir)+16];
-		os_strlcpy(sycophantStateFile,mana.conf->sycophant_dir,sizeof(mana.conf->sycophant_dir));
+		char sycophantStateFile[SYCOPHANT_DIR_LEN];
+		os_strlcpy(sycophantStateFile,mana.conf->sycophant_dir,SYCOPHANT_DIR_LEN);
 		strcat(sycophantStateFile,"SYCOPHANT_STATE");
 		wpa_printf(MSG_DEBUG, "SYCOPHANT: Checking Sycophant State File.");
 
@@ -155,8 +155,8 @@ static struct wpabuf * eap_mschapv2_build_challenge(
 		if (strcmp(sup_state,"C") == 0) {
 			wpa_printf(MSG_DEBUG, "SYCOPHANT: State file says we have a challenge.");
 			FILE* challengeIn;
-			char challengeInFile[sizeof(mana.conf->sycophant_dir)+10];
-			os_strlcpy(challengeInFile,mana.conf->sycophant_dir,sizeof(mana.conf->sycophant_dir));
+			char challengeInFile[SYCOPHANT_DIR_LEN];
+			os_strlcpy(challengeInFile,mana.conf->sycophant_dir,SYCOPHANT_DIR_LEN);
 			strcat(challengeInFile,"CHALLENGE");
 			challengeIn = fopen(challengeInFile, "rb");
 			if (challengeIn == NULL) {
@@ -363,8 +363,8 @@ static void eap_mschapv2_process_response(struct eap_sm *sm,
 	if (mana.conf->enable_sycophant && os_strcmp("NOT_SET",mana.conf->sycophant_dir) != 0) {
 		char sup_state[2] = "*";
 		FILE* sycophantState;
-		char sycophantStateFile[sizeof(mana.conf->sycophant_dir)+16];
-		os_strlcpy(sycophantStateFile,mana.conf->sycophant_dir,sizeof(mana.conf->sycophant_dir));
+		char sycophantStateFile[SYCOPHANT_DIR_LEN];
+		os_strlcpy(sycophantStateFile,mana.conf->sycophant_dir,SYCOPHANT_DIR_LEN);
 		strcat(sycophantStateFile,"SYCOPHANT_STATE");
 		sycophantState = fopen(sycophantStateFile,"rb");
 
@@ -379,8 +379,8 @@ static void eap_mschapv2_process_response(struct eap_sm *sm,
 		if (strcmp(sup_state,"C") == 0) {
 			wpa_printf(MSG_DEBUG, "SYCOPHANT: State file at Challenge, write the Response.");
 			FILE* responseOut;
-			char responseOutFile[sizeof(mana.conf->sycophant_dir)+9];
-			os_strlcpy(responseOutFile,mana.conf->sycophant_dir,sizeof(mana.conf->sycophant_dir));
+			char responseOutFile[SYCOPHANT_DIR_LEN];
+			os_strlcpy(responseOutFile,mana.conf->sycophant_dir,SYCOPHANT_DIR_LEN);
 			strcat(responseOutFile,"RESPONSE");
 			responseOut = fopen(responseOutFile, "wb");
 			if (responseOut == NULL) {
